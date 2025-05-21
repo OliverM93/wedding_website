@@ -12,6 +12,9 @@
   font-size: 17px;
   font-weight: 400;
 } */
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -73,6 +76,14 @@ section {
   justify-content: center;
   align-items: center;
   margin: 4em 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s, transform 0.8s;
+}
+
+.section-divider.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-divider img {
@@ -118,6 +129,22 @@ section {
 .hero p {
   font-size: 1.5em;
   margin-bottom: 1em;
+}
+
+.countdown {
+  font-size: 0.8em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-weight: bold;
+  color: #f7d1c5;
+  letter-spacing: 1px;
+}
+
+.count-num {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #d08a6b;
+  margin: 0 0.1em;
 }
 
 .hero button {
