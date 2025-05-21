@@ -1,0 +1,289 @@
+/* Allgemeine Grundgestaltung */
+
+/*body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background-color: #f4f4f5;
+  background-image: url('Bilder/arches.png');
+  background-repeat: repeat;
+  background-size: auto; 
+  color: #1a1a1a;
+  line-height: 1.6;
+  font-size: 17px;
+  font-weight: 400;
+} */
+
+body {
+  margin: 0;
+  margin-bottom: 5em;
+  font-family: 'Georgia', serif;
+  background-color: #f4f4f5;
+  background-image: 
+    url('Bilder/arches.png'),
+    linear-gradient(135deg, #f2f2f2, #eaeaea);
+  background-repeat: repeat;
+  background-size: auto, cover;
+  background-blend-mode: multiply;
+  color: #1a1a1a;
+  line-height: 1.8;
+  font-size: 20px;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 2em;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  text-align: center;
+  margin-bottom: 0.6em;
+  letter-spacing: 0.5px;
+  color: #2e2e2e;
+
+}
+
+p {
+  margin-bottom: 1.2em;
+}
+
+ul {
+  padding-left: 1.2em;
+  margin-bottom: 1.2em;
+}
+
+section {
+  padding: 0 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+} 
+
+.section-inner {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1em;
+}
+
+.section-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4em 0;
+}
+
+.section-divider img {
+  max-width: 300px;
+  width: 100%;
+  opacity: 0.6;
+}
+
+/* Hero-Bereich */
+.hero {
+  position: relative;
+  background: url('Bilder/wedding-7570263_1920.jpg') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 4em;
+  margin: 0.2em 0;
+}
+
+.hero p {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.hero button {
+  background: transparent;
+  border: 2px solid white;
+  padding: 10px 20px;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 1em;;
+}
+
+.hero button:hover {
+  background: white;
+  color: #333;
+}
+
+/* Navigation */
+.navbar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  z-index: 2;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 2em;
+  margin: 0;
+  margin-bottom: 2em;
+  padding: 0;
+}
+
+.nav-menu li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2em;
+  transition: color 0.3s;
+}
+
+.nav-menu li a:hover {
+  color: #f7d1c5;
+}
+
+/*Ablauf-Sektion */
+.ablauf .section-inner {
+  padding: 0;
+  margin-top: 2em;
+}
+
+.ablauf ul {
+  padding-left: 0;
+  margin: 0;
+}
+
+.ablauf li {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 1.2em;
+  font-size: 1.1em;
+}
+
+.ablauf li:last-child {
+  margin-bottom: 0;
+}
+
+.ablauf li strong {
+  background: #f5d4c9;
+  color: #333;
+  border-radius: 20px;
+  padding: 0.3em 1em;
+  min-width: 90px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 1px;
+  margin-right: 0.5em;
+}
+
+/* Formular */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 1em;
+}
+
+textarea {
+  padding: 10px;
+  min-height: 150px;
+  resize: vertical;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 1em;
+}
+
+select {
+  width: 200px; /* Dropdown breiter machen */
+  font-size: 1.2em; /* Schrift vergrößern */
+  padding: 8px; /* Optional: Fügt etwas Innenabstand hinzu */
+}
+
+button[type="submit"] {
+  background-color: #97a9c2;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #88dcbc;
+}
+
+/* Medienanpassung */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .ablauf li strong {
+  font-size: 0.8em;
+}
+  
+  .nav-menu{
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+    margin-bottom: 1.5em;
+    margin-top: 0.5em;
+  }
+
+  .navbar {
+    padding: 10px 0;
+  }
+
+  .hero-text {
+    margin-top: 2em;
+  }
+
+  .hero h1 {
+    font-size: 2.5em;
+  }
+
+  .hero p {
+    font-size: 1.2em;
+  }
+
+  .hero button {
+    width: 100%;
+    padding: 14px 0;
+  }
+}
