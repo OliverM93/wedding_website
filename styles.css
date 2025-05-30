@@ -154,13 +154,14 @@ section {
   color: white;
   font-size: 1em;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s, color 0.3s, transform 0.3s ease-in-out; /* Hover */
   margin-top: 1em;;
 }
 
 .hero button:hover {
   background: white;
   color: #333;
+  transform: scale(1.05); /* Leichtes Vergrößern beim Hover */
 }
 
 /* Navigation */
@@ -238,20 +239,24 @@ form {
   gap: 10px;
 }
 
-input {
+input, textarea, select {
   padding: 10px;
   border: 1px solid #ccc;
+  border-radius: 5px; /* Leichte Rundung */
   font-family: inherit;
   font-size: 1em;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+input:focus, textarea:focus, select:focus { /* Fokus-Effekt */
+  border-color: #d08a6b; /* Farbige Umrandung beim Fokus */
+  box-shadow: 0 0 0 3px rgba(208, 138, 107, 0.3); /* Leichter Schatten */
+  outline: none; /* Standard-Outline entfernen */
+    }
+
 textarea {
-  padding: 10px;
   min-height: 150px;
   resize: vertical;
-  border: 1px solid #ccc;
-  font-family: inherit;
-  font-size: 1em;
 }
 
 select {
@@ -260,19 +265,26 @@ select {
   padding: 8px; /* Optional: Fügt etwas Innenabstand hinzu */
 }
 
-button[type="submit"] {
+button[type="submit"], .gallery-button {
   background-color: #97a9c2;
   border: none;
+  border-radius: 5px;
   padding: 10px 20px;
   font-size: 1em;
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.3s;
+  transition: background-color 0.3s, transform 0.3s ease-in-out; /* Hover-Effekt */
+  display: block; 
+  width: fit-content; /* Der Button nimmt nur die Breite seines Inhalts an */
+  margin: 2em auto;
+  text-decoration: none; 
+  text-align: center; 
 }
 
-button[type="submit"]:hover {
-  background-color: #88dcbc;
-}
+button[type="submit"]:hover, .gallery-button:hover { /* Hover-Effekt */
+  background-color: #88dcbc; 
+  transform: scale(1.05); /* Skalierung beim Hover */
+    }
 
 /* Medienanpassung */
 @media (max-width: 768px) {
