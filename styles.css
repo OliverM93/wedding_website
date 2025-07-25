@@ -21,9 +21,9 @@ body {
   margin-bottom: 5em;
   font-family: 'Georgia', serif;
   background-color: #f4f4f5;
-  background-image: 
+  /*background-image: 
     url('Bilder/arches.png'),
-    linear-gradient(135deg, #f2f2f2, #eaeaea);
+    linear-gradient(135deg, #f2f2f2, #eaeaea); */
   background-repeat: repeat;
   background-size: auto, cover;
   background-blend-mode: multiply;
@@ -95,7 +95,7 @@ section {
 /* Hero-Bereich */
 .hero {
   position: relative;
-  background: url('Bilder/wedding-7570263_1920.jpg') no-repeat center center/cover;
+  background: url('Bilder/image1.jpeg') no-repeat center center/cover;
   height: 100vh;
   display: flex;
   flex-direction: column;
