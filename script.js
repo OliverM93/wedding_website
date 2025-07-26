@@ -39,3 +39,19 @@ function revealDividers() {
 window.addEventListener('scroll', revealDividers);
 window.addEventListener('load', revealDividers);
 
+// Badge für Navbar-Menüpunkt "Anmeldung"
+// Zeigt einen Badge an, wenn der Nutzer die Anmeldung noch nicht gesehen hat
+// und blendet ihn aus, wenn der Nutzer auf den Link klickt
+// Speichert den Status in localStorage, um den Badge nicht erneut anzuzeigen
+// wenn die Seite neu geladen wird
+document.addEventListener("DOMContentLoaded", function() {
+  const navAnmeldung = document.getElementById("nav-anmeldung-link");
+  if (!localStorage.getItem("anmeldungHighlightSeen")) {
+    navAnmeldung.classList.add("anmeldung-highlight");
+    navAnmeldung.addEventListener("click", function() {
+      navAnmeldung.classList.remove("anmeldung-highlight");
+      localStorage.setItem("anmeldungHighlightSeen", "true");
+    });
+  }
+});
+

@@ -295,6 +295,27 @@ button[type="submit"]:hover, .gallery-button:hover { /* Hover-Effekt */
   transform: scale(1.05); /* Skalierung beim Hover */
     }
 
+/* Glow & Pulse Effekt für Anmeldung */
+.anmeldung-highlight {
+  animation: anmeldung-glow-pulse 2.5s infinite;
+  border-radius: 12px;
+  background: rgba(255, 255, 224, 0.08);
+  transition: box-shadow 0.3s, background 0.3s;
+  padding: 0.25em 1.2em; /* Mehr Abstand zum Text */
+}
+
+@keyframes anmeldung-glow-pulse {
+  0% {
+    box-shadow: 0 0 0px 0px #ffe06644, 0 0 0 0 #ffe06622;
+  }
+  50% {
+    box-shadow: 0 0 10px 4px #ffe06655, 0 0 18px 8px #ffe06622;
+  }
+  100% {
+    box-shadow: 0 0 0px 0px #ffe06644, 0 0 0 0 #ffe06622;
+  }
+}
+
 /* Medienanpassung */
 @media (max-width: 768px) {
   body {
