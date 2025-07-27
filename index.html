@@ -55,7 +55,7 @@
         <h4>Zur Unterkunft</h4>
         <p>Es gibt verschiedene Möglichkeiten:</p>
         <p>‣ direkt im <b>Herrenhaus</b> (einfach ausgestattet, aber mitten im Geschehen),</p>
-        <p>‣ im <b>Hotel</b> im Nachbarort, z. B. Mecklenburger Hof in Gnoien (Shuttle am Samstag wird organisiert),</p>
+        <p>‣ im <b>Hotel</b> im Nachbarort, z.B. Mecklenburger Hof in Gnoien (Shuttle am Samstag wird organisiert),</p>
         <p>‣ oder mit <b>Zelt/Camper</b> vor Ort.</p>
         <p>Die finale Koordination der Unterkünfte übernehmen wir.</p>
         <p><b>Bitte gebt uns für die weitere Planung über diese Webseite bis zum 31. August 2025 eine Rückmeldung.</b></p>
@@ -69,7 +69,7 @@
   <section id="anmeldung" class="anmeldung">
     <div class="section-inner">
         <h2>Anmeldung</h2>
-        <form id="anmeldeformular" action="submit.php" method="POST">
+        <form id="anmeldeformular" action="PHP/submit.php" method="POST">
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" required>
 
@@ -126,7 +126,7 @@
           <!-- Honeypot-Feld-->
           <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
           <!-- Timestamp-Prüfung-->
-          <input type="hidden" name="form_start" value="TIMESTAMP_HIER">
+          <input type="hidden" name="form_start" value="">
 
           <button type="submit">Absenden</button>
         </form>

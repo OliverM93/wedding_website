@@ -92,21 +92,20 @@ $isEmpty = !$fileExists || filesize($csvFile) === 0;
 if (($fp = fopen($csvFile, 'a')) !== false) {
     flock($fp, LOCK_EX);
     if ($isEmpty) {
-        // Header nur einmal schreiben
-        fputcsv($fp, [
-            'Datum',
-            'Name',
-            'Adresse',
-            'Telefon',
-            'E-Mail',
-            'Begleitpersonen',
-            'Unterkunft',
-            'Anreisedatum',
-            'Essenswahl',
-            'Nachricht'
-        ], ';');
+    fputcsv($fp, [
+        'Datum',
+        'Name',
+        'Adresse',
+        'Telefon',
+        'E-Mail',
+        'Begleitpersonen',
+        'Unterkunft',
+        'Anreisedatum',
+        'Essenswahl',
+        'Nachricht'
+    ], ';', '"', '\\'); // <-- Escape-Parameter ergänzt
     }
-    fputcsv($fp, $csvLine, ';');
+    fputcsv($fp, $csvLine, ';', '"', '\\'); // <-- Escape-Parameter ergänzt
     flock($fp, LOCK_UN);
     fclose($fp);
 } else {
