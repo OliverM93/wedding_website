@@ -316,6 +316,64 @@ button[type="submit"]:hover, .gallery-button:hover { /* Hover-Effekt */
   }
 }
 
+  /*Tooltip */
+.info-tooltip {
+  position: relative;
+  display: inline-block;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+.info-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: #97a9c2;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 13px;
+  line-height: 18px;
+  font-style: normal;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.info-tooltip:hover .info-icon,
+.info-tooltip:focus .info-icon {
+  background: #88dcbc;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: 240px;
+  background-color: #444;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px 12px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%; /* über dem Icon */
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.2s;
+  font-size: 0.95em;
+  pointer-events: none;
+}
+
+.info-tooltip:hover .tooltip-text,
+.info-tooltip:focus-within .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.anmeldung label input[type="radio"] {
+  margin-left: 1.5em; /* Abstand zwischen Radio-Button und Label-Text */
+}
+
+
 /* Medienanpassung */
 @media (max-width: 768px) {
   body {

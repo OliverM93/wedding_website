@@ -58,6 +58,7 @@
         <p>‣ im <b>Hotel</b> im Nachbarort, z. B. Mecklenburger Hof in Gnoien (Shuttle am Samstag wird organisiert),</p>
         <p>‣ oder mit <b>Zelt/Camper</b> vor Ort.</p>
         <p>Die finale Koordination der Unterkünfte übernehmen wir.</p>
+        <p><b>Bitte gebt uns für die weitere Planung über diese Webseite bis zum 31. August 2025 eine Rückmeldung.</b></p>
     </div>
     <div class="section-divider">
       <img src="Bilder/divider-8799227_1280.png" alt="Ornament" />
@@ -69,29 +70,63 @@
     <div class="section-inner">
         <h2>Anmeldung</h2>
         <form action="submit.php" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
 
-        <label for="email">E-Mail:</label>
-        <input type="email" id="email" name="email" required>
+          <label for="adresse">Adresse:</label>
+          <input type="text" id="adresse" name="adresse" required>
 
-        <label for="food-selection">Essenswahl:</label>
-        <select id="food-selection" name="food-selection" required>
-            <option value="" disabled selected></option>
-            <option value="vegetarisch">Vegetarisch</option>
-            <option value="vegan">Vegan</option>
-            <option value="fleisch">Fleisch</option>
-        </select>
+          <label for="telefon">Telefon:</label>
+          <input type="tel" id="telefon" name="telefon" required>
 
-        <label for="nachricht">Nachricht:</label>
-        <textarea id="nachricht" placeholder="Schreib uns eine Nachricht..." name="nachricht" required></textarea>
+          <label for="email">E-Mail:</label>
+          <input type="email" id="email" name="email" required>
 
-        <!-- Honeypot-Feld-->
-        <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-        <!-- Timestamp-Prüfung-->
-        <input type="hidden" name="form_start" value="TIMESTAMP_HIER">
+          <label for="teilnehmer">Begleitpersonen
+             <span class="info-tooltip">
+               <span class="info-icon">i</span>
+               <span class="tooltip-text">Trage hier die Namen der Personen ein, die du mitbringst. Wenn du alleine kommst, lasse das Feld einfach leer.</span>
+             </span>
+          </label>
+          <input type="text" id="teilnehmer" name="teilnehmer" placeholder="Namen der Begleitpersonen">
+          
+          <!-- Unterkunftauswahl -->
+          <label>Unterkunft:</label> 
+          <label>
+            <input type="radio" id="herrenhaus" name="unterkunft" value="herrenhaus" required>
+            Herrenhaus Samow (45€ pro Person/Nacht)
+          </label>
+          <label>
+            <input type="radio" id="hotel" name="unterkunft" value="hotel"> 
+            Hotel im Nachbarort (120€ pro Doppelzimmer/Nacht)
+          </label>
+          <label>
+            <input type="radio" id="zelt" name="unterkunft" value="zelt">
+            Ich reise mit Camper/Zelt an
+          </label>
+          <label>
+            <input type="radio" id="selbstorganisation" name="unterkunft" value="selbstorganisation">
+            Ich werde meine Unterbringung selbst organisieren/reise abends ab.
+          </label>
 
-        <button type="submit">Absenden</button>
+          <!-- Essenswauswahl -->
+          <label for="food-selection">Essenswahl:</label>
+          <select id="food-selection" name="food-selection" required>
+              <option value="" disabled selected></option>
+              <option value="vegetarisch">Vegetarisch</option>
+              <option value="vegan">Vegan</option>
+              <option value="fleisch">Fleisch</option>
+          </select>
+
+          <label for="nachricht">Nachricht:</label>
+          <textarea id="nachricht" placeholder="Schreib uns eine Nachricht..." name="nachricht" required></textarea>
+
+          <!-- Honeypot-Feld-->
+          <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+          <!-- Timestamp-Prüfung-->
+          <input type="hidden" name="form_start" value="TIMESTAMP_HIER">
+
+          <button type="submit">Absenden</button>
         </form>
     </div>
      <div class="section-divider">
