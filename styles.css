@@ -373,6 +373,22 @@ button[type="submit"]:hover, .gallery-button:hover { /* Hover-Effekt */
   margin-left: 1.5em; /* Abstand zwischen Radio-Button und Label-Text */
 }
 
+/* Dynamische Breite für Dropdowns */
+select.dynamic-width {
+  width: 150px; /* Einheitliche Anfangsbreite */
+  padding: 0.4em;
+  font: inherit;
+  transition: width 0.2s ease;
+  }
+
+  /* Unsichtbarer Text-Messer */
+#select-measurer {
+  position: absolute;
+  visibility: hidden;
+  white-space: nowrap;
+  font: inherit;
+  padding: 0.4em;
+  }
 
 /* Medienanpassung */
 @media (max-width: 768px) {

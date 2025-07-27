@@ -55,3 +55,33 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
+// Dynamische Breite für Select-Elemente
+// Passt die Breite von Select-Elementen an den Text der ausgewählten Option an
+const measurer = document.getElementById("select-measurer");
+
+  function adjustSelectWidth(select) {
+    const selectedText = select.options[select.selectedIndex]?.text || '';
+    measurer.textContent = selectedText;
+
+    // Gleiche Font übernehmen für exakte Messung
+    const style = getComputedStyle(select);
+    measurer.style.font = style.font;
+    measurer.style.padding = style.padding;
+
+    // +40px Puffer für Pfeil und Innenabstand
+    const newWidth = measurer.offsetWidth + 40;
+    select.style.width = newWidth + "px";
+  }
+
+  // Initial alle Selects behandeln
+  const selects = document.querySelectorAll("select.dynamic-width");
+
+  selects.forEach(select => {
+    // Beim Ändern Breite anpassen
+    select.addEventListener("change", () => adjustSelectWidth(select));
+
+    // Falls bereits vorausgewählt (z. B. durch Formular-Wiederherstellung)
+    if (select.selectedIndex > 0) {
+      adjustSelectWidth(select);
+    }
+  });

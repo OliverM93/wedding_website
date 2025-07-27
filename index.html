@@ -91,32 +91,34 @@
           <input type="text" id="teilnehmer" name="teilnehmer" placeholder="Namen der Begleitpersonen">
           
           <!-- Unterkunftauswahl -->
-          <label>Unterkunft:</label> 
-          <label>
-            <input type="radio" id="herrenhaus" name="unterkunft" value="herrenhaus" required>
-            Herrenhaus Samow (45€ pro Person/Nacht)
-          </label>
-          <label>
-            <input type="radio" id="hotel" name="unterkunft" value="hotel"> 
-            Hotel im Nachbarort (120€ pro Doppelzimmer/Nacht)
-          </label>
-          <label>
-            <input type="radio" id="zelt" name="unterkunft" value="zelt">
-            Ich reise mit Camper/Zelt an
-          </label>
-          <label>
-            <input type="radio" id="selbstorganisation" name="unterkunft" value="selbstorganisation">
-            Ich werde meine Unterbringung selbst organisieren/reise abends ab.
-          </label>
+         <label for="unterkunft">Unterkunft:</label>
+            <select class="dynamic-width" id="unterkunft" name="unterkunft" required>
+              <option value="" disabled selected hidden></option>
+              <option value="herrenhaus">Herrenhaus Samow (45€ pro Person/Nacht)</option>
+              <option value="hotel">Hotel im Nachbarort (120€ pro Doppelzimmer/Nacht)</option>
+              <option value="zelt">Ich reise mit Camper/Zelt an</option>
+              <option value="selbstorganisation">Ich werde meine Unterbringung selbst organisieren/reise abends ab.</option>
+            </select>
+
+          <!-- Tag der Anreise -->
+          <label for="anreisedatum">Anreisedatum:</label>
+            <select class="dynamic-width" id="anreisedatum" name="anreisedatum" required>
+              <option value="" disabled selected hidden></option>
+              <option value="24.07.2026">Freitag, 24. Juli 2026 zum Grillfest</option>
+              <option value="25.07.2026">Samstag, 25. Juli 2026 zur Trauung</option>
+              <option value="beide_tage">Samstag, 25. Juli 2026 zur Feier</option>
+            </select>
+          
 
           <!-- Essenswauswahl -->
           <label for="food-selection">Essenswahl:</label>
-          <select id="food-selection" name="food-selection" required>
-              <option value="" disabled selected></option>
-              <option value="vegetarisch">Vegetarisch</option>
-              <option value="vegan">Vegan</option>
-              <option value="fleisch">Fleisch</option>
+          <select class="dynamic-width" id="food-selection" name="food-selection" required>
+              <option value="" disabled selected hidden></option>
+              <option value="omnivor">alles</option>
+              <option value="veggie">Vegetarisch/Vegan</option>
           </select>
+
+          <span id="select-measurer"></span>
 
           <label for="nachricht">Nachricht:</label>
           <textarea id="nachricht" placeholder="Schreib uns eine Nachricht..." name="nachricht" required></textarea>
