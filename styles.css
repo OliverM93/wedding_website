@@ -205,42 +205,6 @@ section {
   color: #f7d1c5;
 }
 
-/*Ablauf-Sektion */
-.ablauf .section-inner {
-  padding: 0;
-  margin-top: 2em;
-}
-
-.ablauf ul {
-  padding-left: 0;
-  margin: 0;
-}
-
-.ablauf li {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  margin-bottom: 1.2em;
-  font-size: 1.1em;
-}
-
-.ablauf li:last-child {
-  margin-bottom: 0;
-}
-
-.ablauf li strong {
-  background: #f5d4c9;
-  color: #333;
-  border-radius: 20px;
-  padding: 0.3em 1em;
-  min-width: 90px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1em;
-  letter-spacing: 1px;
-  margin-right: 0.5em;
-}
-
 /* Formular */
 form {
   display: flex;

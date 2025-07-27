@@ -1,0 +1,20 @@
+# Immer HTTPS erzwingen
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Zugriff auf .csv-Dateien verbieten
+<FilesMatch "\.csv$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Schutz vor direkten Aufrufen von submit.php
+<Files submit.php>
+  <If "%{HTTP_REFERER} !~ m#^https://(www\.)?deine-domain\.de/#">
+    Require all denied
+  </If>
+</Files>
+
+# Directory Listing deaktivieren
+Options -Indexes

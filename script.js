@@ -1,3 +1,10 @@
+//Zeitstempel für timestamp
+document.addEventListener('DOMContentLoaded', () => {
+  const ts = Math.floor(Date.now() / 1000);
+  const formStart = document.querySelector('input[name="form_start"]');
+  if (formStart) formStart.value = ts;
+});
+
 //Kontaktformular erweitern
 const textarea = document.getElementById("nachricht");
   textarea.addEventListener("input", () => {
@@ -85,3 +92,37 @@ const measurer = document.getElementById("select-measurer");
       adjustSelectWidth(select);
     }
   });
+
+  //AJAX-Formularübermittlung
+  document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('anmeldeformular');
+  const messageBox = document.getElementById('form-message');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Verhindert das klassische Absenden und Reload
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        messageBox.textContent = "Danke für deine Anmeldung!";
+        messageBox.style.color = 'green';
+        form.reset(); // Formular zurücksetzen
+      } else {
+        messageBox.textContent = "Fehler: " + (result.error || 'Unbekannter Fehler');
+        messageBox.style.color = 'red';
+      }
+
+    } catch (error) {
+      messageBox.textContent = "Fehler bei der Übermittlung. Bitte versuche es später erneut.";
+      messageBox.style.color = 'red';
+    }
+  });
+});

@@ -69,7 +69,7 @@
   <section id="anmeldung" class="anmeldung">
     <div class="section-inner">
         <h2>Anmeldung</h2>
-        <form action="submit.php" method="POST">
+        <form id="anmeldeformular" action="submit.php" method="POST">
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" required>
 
@@ -91,7 +91,7 @@
           <input type="text" id="teilnehmer" name="teilnehmer" placeholder="Namen der Begleitpersonen">
           
           <!-- Unterkunftauswahl -->
-         <label for="unterkunft">Unterkunft:</label>
+          <label for="unterkunft">Unterkunft:</label>
             <select class="dynamic-width" id="unterkunft" name="unterkunft" required>
               <option value="" disabled selected hidden></option>
               <option value="herrenhaus">Herrenhaus Samow (45€ pro Person/Nacht)</option>
@@ -131,6 +131,7 @@
           <button type="submit">Absenden</button>
         </form>
     </div>
+    <div id="form-message"></div>
      <div class="section-divider">
       <img src="Bilder/divider-8799227_1280.png" alt="Ornament" />
     </div>
