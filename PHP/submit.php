@@ -25,7 +25,7 @@ if (!empty($_POST['website'])) {
 // Timestamp prüfen (mind. 5s, max. 1h)
 $formStart = $_POST['form_start'] ?? 0;
 $currentTime = time();
-$minSeconds = 5;
+$minSeconds = 3;
 $maxSeconds = 3600;
 
 if (!is_numeric($formStart) || ($currentTime - $formStart) < $minSeconds || ($currentTime - $formStart) > $maxSeconds) {
@@ -49,7 +49,7 @@ $foodSelection = cleanInput($_POST['food-selection'] ?? '');
 $nachricht     = cleanInput($_POST['nachricht'] ?? '');
 
 // Pflichtfelder prüfen
-if (!$name || !$adresse || !$telefon || !$unterkunft || !$anreisedatum || !$foodSelection || !$nachricht) {
+if (!$name || !$adresse || !$telefon || !$unterkunft || !$anreisedatum || !$foodSelection) {
     http_response_code(400);
     echo json_encode([
         "success" => false,
