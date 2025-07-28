@@ -94,35 +94,40 @@ const measurer = document.getElementById("select-measurer");
   });
 
   //AJAX-Formularübermittlung
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('anmeldeformular');
-  const messageBox = document.getElementById('form-message');
 
   form.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Verhindert das klassische Absenden und Reload
-
+    event.preventDefault();
     const formData = new FormData(form);
-
     try {
       const response = await fetch(form.action, {
         method: 'POST',
         body: formData,
       });
-
       const result = await response.json();
-
       if (result.success) {
-        messageBox.textContent = "Danke für deine Anmeldung!";
-        messageBox.style.color = 'green';
-        form.reset(); // Formular zurücksetzen
+        showToast("Danke für deine Anmeldung!", "success");
+        form.reset();
       } else {
-        messageBox.textContent = "Fehler: " + (result.error || 'Unbekannter Fehler');
-        messageBox.style.color = 'red';
+        showToast("Fehler: " + (result.error || 'Unbekannter Fehler'), "error");
       }
-
     } catch (error) {
-      messageBox.textContent = "Fehler bei der Übermittlung. Bitte versuche es später erneut.";
-      messageBox.style.color = 'red';
+      showToast("Fehler bei der Übermittlung. Bitte versuche es später erneut.", "error");
     }
   });
 });
+
+function showToast(message, type = "success") {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.className = `toast show ${type}`;
+
+  // Nach 3.5 Sekunden wieder ausblenden
+  setTimeout(() => {
+    toast.classList.remove('show', 'success', 'error');
+  }, 3500);
+}
+
