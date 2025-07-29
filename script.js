@@ -1,4 +1,4 @@
-//Zeitstempel für timestamp
+//Timestamp-Prüfung
 document.addEventListener('DOMContentLoaded', () => {
   const ts = Math.floor(Date.now() / 1000);
   const formStart = document.querySelector('input[name="form_start"]');
@@ -14,7 +14,7 @@ const textarea = document.getElementById("nachricht");
 
 // Countdown Timer
 function updateCountdown() {
-  const eventDate = new Date("2026-07-25T12:00:00");
+  const eventDate = new Date("2026-07-25T00:00:00");
   const now = new Date();
   const diff = eventDate - now;
 
