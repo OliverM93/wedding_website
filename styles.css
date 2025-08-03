@@ -7,6 +7,7 @@ body {
   margin: 0;
   margin-bottom: 5em;
   font-family: 'Roboto', sans-serif;
+  text-align: justify;
   background-color: #f4f4f5;
   /*background-image: 
     url('Bilder/arches.png'),
