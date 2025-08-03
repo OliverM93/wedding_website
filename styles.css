@@ -409,4 +409,12 @@ select.dynamic-width {
     width: 100%;
     padding: 14px 0;
   }
+
+  .section-inner {
+  padding: 0 2em;
+  }
+
+  form {
+  padding: 0;
+  }
 }

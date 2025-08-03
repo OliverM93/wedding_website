@@ -22,7 +22,7 @@ if (!empty($_POST['website'])) {
     exit;
 }
 
-// Timestamp prüfen (mind. 5s, max. 1h)
+// Timestamp prüfen (mind. 3s, max. 1h)
 $formStart = $_POST['form_start'] ?? 0;
 $currentTime = time();
 $minSeconds = 3;
@@ -64,6 +64,13 @@ if (!$email) {
         "success" => false,
         "error" => "Bitte gib eine gültige E-Mail-Adresse an."
     ]);
+    exit;
+}
+
+// Nachrichten auf Links prüfen
+if (preg_match('/(http|www\.|\.com|\.org|\.net)/i', $nachricht)) {
+    http_response_code(400);
+    echo json_encode(["success" => false, "error" => "Links sind in der Nachricht nicht erlaubt."]);
     exit;
 }
 
@@ -123,4 +130,10 @@ echo json_encode([
     "message" => "Danke für deine Anmeldung, $name! Wir freuen uns auf dich."
 ]);
 exit;
+
+// --- Optional: E-Mail-Benachrichtigung (auskommentiert) ---
+//$to = "deine-email@example.com";
+//$subject = "Neue Anmeldung von $name";
+//$message = "Name: $name\nE-Mail: $email\nNachricht: $nachricht";
+//mail($to, $subject, $message);
 ?>
