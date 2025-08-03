@@ -1,6 +1,13 @@
 <?php
 // --- Header für JSON-Antwort ---
 header('Content-Type: application/json');
+// --- Sicherheitsheader ---
+header("X-Content-Type-Options: nosniff");
+header("X-Frame-Options: SAMEORIGIN");
+header("Referrer-Policy: no-referrer");
+header("Content-Security-Policy: default-src 'self'");
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
+
 
 // --- Konfiguration ---
 $csvFile = __DIR__ . '/../data/anmeldungen.csv'; // Speicherort der CSV
@@ -63,6 +70,18 @@ if (!$email) {
     echo json_encode([
         "success" => false,
         "error" => "Bitte gib eine gültige E-Mail-Adresse an."
+    ]);
+    exit;
+}
+
+// Zeilenumbrüche in der E-Mail-Adresse prüfen
+// Dies verhindert Angriffe durch Zeilenumbrüche in der E-Mail-Adresse
+// und schützt vor Header-Injection-Angriffen.
+if (preg_match("/[\r\n]/", $_POST['email'])) {
+    http_response_code(400);
+    echo json_encode([
+        "success" => false,
+        "error" => "Ungültige Zeichen in der E-Mail-Adresse."
     ]);
     exit;
 }
