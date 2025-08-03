@@ -175,7 +175,7 @@ section {
 .nav-menu {
   list-style: none;
   display: flex;
-  gap: 2em;
+  gap: 3em;
   margin: 0;
   margin-bottom: 2em;
   padding: 0;
@@ -388,6 +388,7 @@ select.dynamic-width {
     justify-content: center;
     margin-bottom: 1.5em;
     margin-top: 0.5em;
+    max-width: 90%;
   }
 
   .navbar {
