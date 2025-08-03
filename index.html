@@ -1,15 +1,53 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unsere Hochzeit</title>
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-<!-- Toast-Container für Pop-Up-Meldungen -->
 <body>
   <div id="toast" class="toast"></div>
-    <!-- Hero mit Header -->
   <header class="hero">
     <nav class="navbar">
       <ul class="nav-menu">
@@ -23,133 +61,122 @@
       <h1>Anna & Lars</h1>
       <p>Wir heiraten am 25. Juli 2026</p>
       <div id="countdown" class="countdown"></div>
-      <a href= "/termine.ics" download="termine.ics">
+      <a href="/termine.ics" download="termine.ics">
         <button class="calendar">Zum Kalender hinzufügen</button>
       </a>
     </div>
   </header>
-    <div class="hero-overlay"></div>
+  <div class="hero-overlay"></div>
 
- <!-- Sektionen-->
-  <section id="overview" class="overview">
-    <div class="section-inner">
-        <h2>„Überraschung!“ – Wir heiraten!</h2>
-        <p>Am 25. Juli 2026 feiern wir mit euch unsere Hochzeit im Herrenhaus Samow in MV. Wir planen ein großes und ausgelassenes Fest, das über das gesamte Wochenende um das Herrenhaus stattfinden wird.</p>
-        <p>Vor der freien Trauung und großen Feier am Samstag, laden wir euch am 24. Juli zu einem entspannten Grillabend ein - zum Ankommen, Wiedersehen und Kennenlernen.</p>
+  <section id="overview" class="bg-creme text-weinrot py-12 relative">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-4xl font-dancing mb-8">„Überraschung!“ – Wir heiraten!</h2>
+      <p class="text-lg font-roboto mb-4">
+        Am 25. Juli 2026 feiern wir mit euch unsere Hochzeit im Herrenhaus Samow in MV. Wir planen ein großes und ausgelassenes Fest, das über das gesamte Wochenende um das Herrenhaus stattfinden wird.
+      </p>
+      <p class="text-lg font-roboto">
+        Vor der freien Trauung und großen Feier am Samstag, laden wir euch am 24. Juli zu einem entspannten Grillabend ein - zum Ankommen, Wiedersehen und Kennenlernen.
+      </p>
     </div>
     <div class="section-divider">
       <img src="Bilder/divider-8799227_1280.png" alt="Ornament" />
     </div>
   </section>
 
-<section id="anfahrt" class="anfahrt">
-    <div class="section-inner">
-        <h2>Anfahrt & Unterkunft</h2>
-        <p>Die Feier findet im Herrenhaus Samow statt: Samow 14, 17179 Behren-Lübchin</p>
-        <div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2345.094855568875!2d12.617404677268555!3d54.00109187248649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47ac7b31e6686ef9%3A0x8b592991677302ee!2sHerrenhaus%20Samow%20-%20Marc%20Etienne%20Graf%20von%20Polier!5e0!3m2!1sde!2sde!4v1753462884886!5m2!1sde!2sde"
-                width="100%" 
-                height="300" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
-        <h4>Zur Unterkunft</h4>
-        <p>Es gibt verschiedene Möglichkeiten:</p>
-        <p>‣ direkt im <b>Herrenhaus</b> (einfach ausgestattet, aber mitten im Geschehen),</p>
-        <p>‣ im <b>Hotel</b> im Nachbarort, z.B. Mecklenburger Hof in Gnoien (Shuttle am Samstag wird organisiert),</p>
-        <p>‣ oder mit <b>Zelt/Camper</b> vor Ort.</p>
-        <p>Die finale Koordination der Unterkünfte übernehmen wir.</p>
-        <p><b>Bitte gebt uns für die weitere Planung über diese Webseite bis zum 31. August 2025 eine Rückmeldung.</b></p>
+  <section id="anfahrt" class="bg-creme text-weinrot py-12 relative">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-4xl font-dancing mb-8">Anfahrt & Unterkunft</h2>
+      <p class="text-lg font-roboto mb-4">Die Feier findet im Herrenhaus Samow statt: Samow 14, 17179 Behren-Lübchin</p>
+      <div class="mb-4">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2345.094855568875!2d12.617404677268555!3d54.00109187248649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47ac7b31e6686ef9%3A0x8b592991677302ee!2sHerrenhaus%20Samow%20-%20Marc%20Etienne%20Graf%20von%20Polier!5e0!3m2!1sde!2sde!4v1753462884886!5m2!1sde!2sde"
+          width="100%"
+          height="300"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+      <h4 class="text-2xl font-dancing mb-4 text-creme">Zur Unterkunft</h4>
+      <p class="text-lg font-roboto mb-2">Es gibt verschiedene Möglichkeiten:</p>
+      <p class="text-lg font-roboto">‣ direkt im <b>Herrenhaus</b> (einfach ausgestattet, aber mitten im Geschehen),</p>
+      <p class="text-lg font-roboto">‣ im <b>Hotel</b> im Nachbarort, z.B. Mecklenburger Hof in Gnoien (Shuttle am Samstag wird organisiert),</p>
+      <p class="text-lg font-roboto">‣ oder mit <b>Zelt/Camper</b> vor Ort.</p>
+      <p class="text-lg font-roboto mb-2">Die finale Koordination der Unterkünfte übernehmen wir.</p>
+      <p class="text-lg font-roboto"><b>Bitte gebt uns für die weitere Planung über diese Webseite bis zum 31. August 2025 eine Rückmeldung.</b></p>
     </div>
     <div class="section-divider">
       <img src="Bilder/divider-8799227_1280.png" alt="Ornament" />
     </div>
-</section>
+  </section>
 
-    <!-- Kontaktformular -->
-  <section id="anmeldung" class="anmeldung">
-    <div class="section-inner">
-        <h2>Anmeldung</h2>
-        <form id="anmeldeformular" action="PHP/submit.php" method="POST">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required>
-
-          <label for="adresse">Adresse:</label>
-          <input type="text" id="adresse" name="adresse" required>
-
-          <label for="telefon">Telefon:</label>
-          <input type="tel" id="telefon" name="telefon" required>
-
-          <label for="email">E-Mail:</label>
-          <input type="email" id="email" name="email" required>
-
-          <label for="teilnehmer">Begleitpersonen
-             <span class="info-tooltip">
-               <span class="info-icon">i</span>
-               <span class="tooltip-text">Trage hier die Namen der Personen ein, die du mitbringst. Wenn du alleine kommst, lasse das Feld einfach leer.</span>
-             </span>
-          </label>
-          <input type="text" id="teilnehmer" name="teilnehmer" placeholder="Namen der Begleitpersonen">
-          
-          <!-- Unterkunftauswahl -->
-          <label for="unterkunft">Unterkunft:</label>
-            <select class="dynamic-width" id="unterkunft" name="unterkunft" required>
-              <option value="" disabled selected hidden></option>
-              <option value="herrenhaus">Herrenhaus Samow (45€ pro Person/Nacht)</option>
-              <option value="hotel">Hotel im Nachbarort (120€ pro Doppelzimmer/Nacht)</option>
-              <option value="zelt">Ich reise mit Camper/Zelt an</option>
-              <option value="selbstorganisation">Ich werde meine Unterbringung selbst organisieren/reise abends ab.</option>
-            </select>
-
-          <!-- Tag der Anreise -->
-          <label for="anreisedatum">Anreisedatum:</label>
-            <select class="dynamic-width" id="anreisedatum" name="anreisedatum" required>
-              <option value="" disabled selected hidden></option>
-              <option value="24.07.2026">Freitag, 24. Juli 2026 zum Grillfest</option>
-              <option value="25.07.2026">Samstag, 25. Juli 2026 zur Trauung</option>
-              <option value="beide_tage">Samstag, 25. Juli 2026 zur Feier</option>
-            </select>
-          
-
-          <!-- Essenswauswahl -->
-          <label for="food-selection">Essenswahl:</label>
-          <select class="dynamic-width" id="food-selection" name="food-selection" required>
-              <option value="" disabled selected hidden></option>
-              <option value="omnivor">alles</option>
-              <option value="veggie">Vegetarisch/Vegan</option>
-          </select>
-
-          <span id="select-measurer"></span>
-
-          <label for="nachricht">Nachricht:</label>
-          <textarea id="nachricht" placeholder="Schreib uns eine Nachricht..." name="nachricht" formnovalidate></textarea>
-
-          <!-- Honeypot-Feld-->
-          <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-          <!-- Timestamp-Prüfung-->
-          <input type="hidden" name="form_start" value="">
-
-          <button type="submit">Absenden</button>
-        </form>
+  <section id="anmeldung" class="bg-creme text-weinrot py-12 relative">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-4xl font-dancing mb-8">Anmeldung</h2>
+      <form id="anmeldeformular" action="PHP/submit.php" method="POST" class="flex flex-col gap-4 max-w-lg mx-auto">
+        <label for="name" class="text-lg font-roboto text-left">Name:</label>
+        <input type="text" id="name" name="name" required class="p-2 border border-weinrot rounded focus:border-weinrot focus:ring-2 focus:ring-weinrot/30" />
+        <label for="adresse" class="text-lg font-roboto text-left">Adresse:</label>
+        <input type="text" id="adresse" name="adresse" required class="p-2 border border-weinrot rounded focus:border-weinrot focus:ring-2 focus:ring-weinrot/30" />
+        <label for="telefon" class="text-lg font-roboto text-left">Telefon:</label>
+        <input type="tel" id="telefon" name="telefon" required class="p-2 border border-weinrot rounded focus:border-weinrot focus:ring-2 focus:ring-weinrot/30" />
+        <label for="email" class="text-lg font-roboto text-left">E-Mail:</label>
+        <input type="email" id="email" name="email" required class="p-2 border border-weinrot rounded focus:border-weinrot focus:ring-2 focus:ring-weinrot/30" />
+        <label for="teilnehmer" class="text-lg font-roboto text-left flex items-center">
+          Begleitpersonen
+          <span class="info-tooltip">
+            <span class="info-icon">i</span>
+            <span class="tooltip-text">Trage hier die Namen der Personen ein, die du mitbringst. Wenn du alleine kommst, lasse das Feld einfach leer.</span>
+          </span>
+        </label>
+        <input type="text" id="teilnehmer" name="teilnehmer" placeholder="Namen der Begleitpersonen" class="p-2 border border-weinrot rounded focus:border-weinrot focus:ring-2 focus:ring-weinrot/30" />
+        <label for="unterkunft" class="text-lg font-roboto text-left">Unterkunft:</label>
+        <select id="unterkunft" name="unterkunft" required class="dynamic-width p-2 border border-weinrot rounded focus:border-weinrot focus:ring-2 focus:ring-weinrot/30">
+          <option value="" disabled selected hidden></option>
+          <option value="herrenhaus">Herrenhaus Samow (45€ pro Person/Nacht)</option>
+          <option value="hotel">Hotel im Nachbarort (120€ pro Doppelzimmer/Nacht)</option>
+          <option value="zelt">Ich reise mit Camper/Zelt an</option>
+          <option value="selbstorganisation">Ich werde meine Unterbringung selbst organisieren/reise abends ab.</option>
+        </select>
+        <label for="anreisedatum" class="text-lg font-roboto text-left">Anreisedatum:</label>
+        <select id="anreisedatum" name="anreisedatum" required class="dynamic-width p-2 border border-weinrot rounded focus:border-weinrot focus:ring-2 focus:ring-weinrot/30">
+          <option value="" disabled selected hidden></option>
+          <option value="24.07.2026">Freitag, 24. Juli 2026 zum Grillfest</option>
+          <option value="25.07.2026">Samstag, 25. Juli 2026 zur Trauung</option>
+          <option value="beide_tage">Samstag, 25. Juli 2026 zur Feier</option>
+        </select>
+        <label for="food-selection" class="text-lg font-roboto text-left">Essenswahl:</label>
+        <select id="food-selection" name="food-selection" required class="dynamic-width p-2 border border-weinrot rounded focus:border-weinrot focus:ring-2 focus:ring-weinrot/30">
+          <option value="" disabled selected hidden></option>
+          <option value="omnivor">alles</option>
+          <option value="veggie">Vegetarisch/Vegan</option>
+        </select>
+        <span id="select-measurer"></span>
+        <label for="nachricht" class="text-lg font-roboto text-left">Nachricht:</label>
+        <textarea id="nachricht" placeholder="Schreib uns eine Nachricht..." name="nachricht" class="p-2 border border-weinrot rounded focus:border-weinrot focus:ring-2 focus:ring-weinrot/30 resize-vertical min-h-[150px]"></textarea>
+        <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off" />
+        <input type="hidden" name="form_start" value="" />
+        <button type="submit" class="bg-weinrot text-creme px-6 py-2 rounded hover:bg-creme hover:text-weinrot transition-transform transform hover:scale-105 w-fit mx-auto mt-4">Absenden</button>
+      </form>
+      <div id="form-message"></div>
     </div>
-    <div id="form-message"></div>
-     <div class="section-divider">
+    <div class="section-divider">
       <img src="Bilder/divider-8799227_1280.png" alt="Ornament" />
     </div>
   </section>
 
-   <!-- Galerie -->
-  <section id="gallery" class="gallery">
-    <div class="section-inner">
-        <h2>Unsere Galerie</h2>
-        <p>Die schönsten Momente unseres großen Tages und gemeinsame Erinnerungen findet ihr in unserer Galerie. Klickt einfach auf den Button, um alle Fotos anzusehen!</p>
-        <p>Ihr werdet sie kurz nach der Hochzeit hier einsehen können.</p>
-        <a href="https://deine-cloud-galerie.de" target="_blank" class="gallery-button">Zur Fotogalerie</a>
+  <section id="gallery" class="bg-creme text-weinrot py-12 relative">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-4xl font-dancing mb-8">Unsere Galerie</h2>
+      <p class="text-lg font-roboto mb-4">
+        Die schönsten Momente unseres großen Tages und gemeinsame Erinnerungen findet ihr in unserer Galerie. Klickt einfach auf den Button, um alle Fotos anzusehen!
+      </p>
+      <p class="text-lg font-roboto mb-4">Ihr werdet sie kurz nach der Hochzeit hier einsehen können.</p>
+      <a href="https://deine-cloud-galerie.de" target="_blank" class="button bg-weinrot text-creme px-6 py-2 rounded hover:bg-creme hover:text-weinrot transition-transform transform hover:scale-105 w-fit mx-auto mt-4 inline-block">Zur Fotogalerie</a>
     </div>
   </section>
+
   <script src="script.js"></script>
 </body>
 </html>
