@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 
 // --- Konfiguration ---
-$csvFile = __DIR__ . '/data/anmeldungen.csv'; // Speicherort der CSV
+$csvFile = __DIR__ . '/../data/anmeldungen.csv'; // Speicherort der CSV
 
 // --- Hilfsfunktion: Eingaben säubern ---
 function cleanInput($data) {
