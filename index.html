@@ -6,6 +6,7 @@
   <title>Unsere Hochzeit</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
 </head>
 <!-- Toast-Container für Pop-Up-Meldungen -->
 <body>
@@ -24,9 +25,27 @@
       <h1>Anna & Lars</h1>
       <p>Wir heiraten am 25. Juli 2026</p>
       <div id="countdown" class="countdown"></div>
+      <!--
       <a href= "/termine.ics" download="termine.ics">
         <button class="calendar">Zum Kalender hinzufügen</button>
       </a>
+      -->
+      <div class="calendar-button-wrapper">
+        <add-to-calendar-button
+          name="Anna & Lars Hochzeit"
+          description="Feier mit uns!"
+          startDate="2026-07-25"
+          startTime="12:00"
+          endTime="23:00"
+          timeZone="Europe/Berlin"
+          location="Samow 14, 17179 Behren-Lübchin"
+          options="'Apple','Google','iCal','Outlook.com','Yahoo'"
+          label="Zum Kalender hinzufügen"
+          lightMode="light"
+          hideBackground
+          hideIconButton
+        ></add-to-calendar-button>
+      </div>
     </div>
   </header>
     <div class="hero-overlay"></div>

@@ -241,6 +241,12 @@ button[type="submit"], .gallery-button {
   text-align: center; 
 }
 
+.calendar-button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
 button[type="submit"]:hover, .gallery-button:hover { /* Hover-Effekt */
   background-color: #f4f4f5;
   color: black; 
