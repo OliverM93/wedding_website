@@ -97,7 +97,7 @@ section {
 /* Hero-Bereich */
 .hero {
   position: relative;
-  background: url('Bilder/image1.jpeg') no-repeat center top/cover;
+  background: url('Bilder/image1 ver2.jpg') no-repeat center top/cover;
   height: 100vh;
   display: flex;
   flex-direction: column;
