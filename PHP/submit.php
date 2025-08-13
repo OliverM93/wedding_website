@@ -8,7 +8,6 @@ header("Referrer-Policy: no-referrer");
 header("Content-Security-Policy: default-src 'self'");
 header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
 
-
 // --- Konfiguration ---
 $csvFile = __DIR__ . '/../data/anmeldungen.csv'; // Speicherort der CSV
 
@@ -143,16 +142,16 @@ if (($fp = fopen($csvFile, 'a')) !== false) {
     exit;
 }
 
+// --- E-Mail-Benachrichtigung ---
+$to = "anna.burkert@anna-und-lars-heiraten.de";
+$subject = "Neue Anmeldung von $name";
+$message = "Name: $name\nE-Mail: $email\nNachricht: $nachricht";
+mail($to, $subject, $message);
+
 // --- 5. Erfolg zurückgeben ---
 echo json_encode([
     "success" => true,
     "message" => "Danke für deine Anmeldung, $name! Wir freuen uns auf dich."
 ]);
 exit;
-
-// --- Optional: E-Mail-Benachrichtigung (auskommentiert) ---
-//$to = "deine-email@example.com";
-//$subject = "Neue Anmeldung von $name";
-//$message = "Name: $name\nE-Mail: $email\nNachricht: $nachricht";
-//mail($to, $subject, $message);
 ?>
