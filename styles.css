@@ -391,7 +391,7 @@ select.dynamic-width {
   }
   
   .nav-menu{
-    font-size: 0.5em;
+    font-size: 0.65em;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1.5em;
